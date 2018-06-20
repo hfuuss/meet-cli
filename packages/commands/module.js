@@ -9,7 +9,7 @@ const getMeetConfig = function(){
 const meetConfig = getMeetConfig();
 
 // 要拷贝的目标所在路径
-const templatePath = path.join(__dirname,'..','meet/module');
+const templatePath = typeof meetConfig.moduleTemplatePath !== 'undefined'? path.resolve(meetConfig.moduleTemplatePath):path.join(__dirname,'..','meet/module');
 // 目标文件夹根路径
 const targetRootPath = meetConfig.modulePath;
 
