@@ -3,15 +3,10 @@ const fs = require('fs');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 
-const getMeetConfig = function(){
-    return require(path.resolve('meet.config.js'));
-};
-const meetConfig = getMeetConfig();
-
 // 要拷贝的目标所在路径
-const templatePath = typeof meetConfig.moduleTemplatePath !== 'undefined'? path.resolve(meetConfig.moduleTemplatePath):path.join(__dirname,'..','meet/module');
+let templatePath;
 // 目标文件夹根路径
-const targetRootPath = meetConfig.modulePath;
+let targetRootPath;
 
 function deleteFolderRecursive (path) {
     if (fs.existsSync(path)) {
@@ -52,7 +47,9 @@ function copyTemplates(name){
 }
 
 
-function generateModule(name){
+function generateModule(meetConfig,name){
+    templatePath = typeof meetConfig.moduleTemplatePath !== 'undefined'? path.resolve(meetConfig.moduleTemplatePath):path.join(__dirname,'..','meet/module');
+    targetRootPath = meetConfig.modulePath;
     let targetDir = path.join(targetRootPath,name);
 
     if(fs.existsSync(targetDir)){

@@ -1,21 +1,11 @@
-const path = require('path');
-const shell = require('shelljs');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const shellHelper = require('../lib/shellHelper');
 const upload = require('./upload');
-const Spinner = require('../lib/spinner');
-const analysis = require('../lib/analysis');
-
-const getMeetConfig = function(){
-    return require(path.resolve('meet.config.js'));
-};
-const meetConfig = getMeetConfig();
 
 let config = {
     autoPublish: false
 };
-Object.assign(config,meetConfig);
 
 function gitCommit(){
     // 发布，提示输入commit 信息
@@ -47,53 +37,19 @@ function gitCommit(){
         });
 }
 
-function publish(module){
+function publish(meetConfig){
+    Object.assign(config,meetConfig);
+    upload(config.upload)
+        .then(res=>{
+            console.log(chalk.green('Upload To CDN finished!'));
 
-    if(typeof module === 'undefined'){
-        console.log(chalk.red(`Module ${module} is undefined !`));
-        return;
-    }
-    if (!shell.which('git')) {
-        shell.echo('Sorry, this script requires git');
-        shell.exit(1);
-    }
-    if(typeof config.gitUrl === "undefined" || config.gitUrl === ''){
-        console.log(chalk.red('Sorry, your gitUrl is not defined in meet.config.js'));
-        shell.exit(1)
-    }
-
-    let spinner = new Spinner('building...');
-
-    // 执行多个命令
-    shellHelper.series([
-        `${meetConfig.npmBuildCommand?meetConfig.npmBuildCommand:'npm run build '}${module} `,
-    ], function(err){
-        if(err){
+            if(config.autoPublish === true){
+                gitCommit();
+            }
+        })
+        .catch(err=>{
             console.log(chalk.red(err));
-            process.exit(0);
-        }
-        spinner.stop();
-        console.log(chalk.green('Build finished!'));
-
-        // 分析资源体积及占比
-        analysis();
-
-        if(config.upload.autoUpload === true){
-            upload(config.upload)
-                .then(res=>{
-                    console.log(chalk.green('Upload To CDN finished!'));
-
-                    if(config.autoPublish === true){
-                        gitCommit();
-                    }
-                })
-                .catch(err=>{
-                    console.log(chalk.red(err));
-                })
-        }
-
-    });
-
+        })
 }
 
 

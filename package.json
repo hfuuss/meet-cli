@@ -18,6 +18,7 @@
     "chalk": "^2.4.1",
     "clui": "^0.3.6",
     "commander": "^2.15.1",
+    "figlet": "^1.2.0",
     "inquirer": "^6.0.0",
     "meetyou-ali-oss": "^1.0.7",
     "shelljs": "^0.8.2"
