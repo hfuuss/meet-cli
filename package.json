@@ -13,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.5",
     "chalk": "^2.4.1",
+    "clui": "^0.3.6",
     "commander": "^2.15.1",
+    "inquirer": "^6.0.0",
+    "meetyou-ali-oss": "^1.0.7",
     "shelljs": "^0.8.2"
   }
 }
