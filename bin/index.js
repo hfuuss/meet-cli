@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const program = require('commander');
 const gmodule = require('../packages/commands/module');
+// const serve = require('../packages/commands/serve');
 const question = require('../packages/commands/question');
 const build = require('../packages/commands/build');
 const publish = require('../packages/commands/publish');
@@ -28,6 +29,13 @@ program
     .action(function(module){
         gmodule(config,module)
     });
+
+// program
+//     .command('serve [module]')
+//     .description('run node.js server and watch module for hot module reload!')
+//     .action(function(module){
+//         serve(module)
+//     });
 
 program
     .command('build [module]')
