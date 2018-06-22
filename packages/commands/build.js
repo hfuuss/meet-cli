@@ -37,7 +37,8 @@ function build(meetConfig,module){
         console.log(chalk.green('Build finished!'));
 
         // 分析资源体积及占比
-        analysis();
+        analysis(config.upload.config.srcDir);
+
     });
 }
 

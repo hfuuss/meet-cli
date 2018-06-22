@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const program = require('commander');
 const gmodule = require('../packages/commands/module');
-// const question = require('../packages/commands/question');
+const question = require('../packages/commands/question');
 const build = require('../packages/commands/build');
 const publish = require('../packages/commands/publish');
 const upload = require('../packages/commands/upload');
@@ -55,6 +55,13 @@ program
     .description('analysis dist files size and percent')
     .action(function () {
         analysis(config.upload.config.srcDir);
+    });
+
+program
+    .command('question')
+    .description('analysis dist files size and percent')
+    .action(function(){
+        question()
     });
 
 program.parse(process.argv);

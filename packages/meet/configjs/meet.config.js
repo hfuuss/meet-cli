@@ -9,7 +9,7 @@ module.exports = {
     moduleTemplatePath: path.resolve('meet/templates/module'),
 
     // project git url
-    gitUrl:'http://gitlab.meiyou.com/advertise/ad-activity.git',
+    gitUrl:'you git url',
 
     // module build npm command
     npmBuildCommand:'npm run release:',
@@ -22,14 +22,14 @@ module.exports = {
 
         // alioss server config
         config:{
-            accessKeyId: "LTAIovY7dqAhfHH0",
-            accessKeySecret: "5xkXY9gDAvHdB7oudB8WMkEf6wlzD8",
-            bucket: "adstatic",
-            region: "oss-cn-beijing",
+            accessKeyId: "",
+            accessKeySecret: "",
+            bucket: "",
+            region: "",
             srcDir: path.resolve('public/assets'),// 要上传的dist文件夹
             ignoreDir: false,
             deduplication: true,
-            prefix: "ad-activity.meiyou.com",
+            prefix: "xxx.xxx.com",
         }
     },
 
